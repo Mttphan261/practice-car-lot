@@ -1,11 +1,15 @@
 import React from "react";
 
-function Search() {
+function Search({handleSearch, search, handleFilter, filter}) {
+
+  
   return (
     <div className="search">
       <div className="select">
         <label htmlFor="filter">Filter</label>
         <select
+          onChange={handleFilter}
+          value={filter}
           name="model search"
           id="model search"
           className="border-2 border-solid ml-[10px] border-slate-900">
@@ -23,6 +27,8 @@ function Search() {
       <div className="ml-[10px]">
         <label htmlFor="search">Search:</label>
         <input
+          onChange={handleSearch}
+          value={search}
           type="text"
           id="search"
           placeholder="Type a name to search..."

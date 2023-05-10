@@ -98,6 +98,17 @@
       "image": "https://images.autotrader.com/hn/c/9c2d681a1003464ca91e101378c9f19f.jpg",
       "color": "White",
       "id": 9
+    },
+    {
+      "car_make": "Mater",
+      "car_model": "From Cars",
+      "car_model_year": "2017",
+      "color": "Brown",
+      "mileage": "9999999",
+      "price": "1000000000",
+      "condition": "Used",
+      "image": "https://cdn11.bigcommerce.com/s-5ylnei6or5/products/528/images/1025/1753_Mater_CarsRefresh_46__37747.1514658593.500.750.jpg?c=2",
+      "id": 10
     }
   ]
 }

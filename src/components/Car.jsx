@@ -10,7 +10,7 @@ import Button from "@mui/material/Button";
 
 import React, {useState} from "react";
 
-function Car() {
+function Car({car}) {
   const [showForm, setShowForm] = useState(false);
 
   return (
@@ -18,22 +18,23 @@ function Car() {
       {/**can edit below this */}
       {!showForm ? (
         <Card sx={{maxWidth: 350, height: 600}}>
-          <CardHeader title={`TITLE`} sx={{fontSize: "20px"}} />
+          <CardHeader title={`${car.car_make} ${car.car_model} ${car.car_model_year}`} sx={{fontSize: "20px"}} />
           <CardMedia
             component="img"
             height="250"
-            image="{/**image*/}"
-            alt={`YEAR MAKE MODEL`}
+            image={car.image}
+            //**********!!! */
+            alt={`${car.car_make} ${car.car_model} ${car.car_model_year}`}
           />
           <CardContent>
             <Typography variant="h5" color="text.secondary" align="center">
-              ${/**PRICE */}
+              ${car.price}
             </Typography>
           </CardContent>
           <CardContent>
-            <Typography paragraph>Condition: {/** */}</Typography>
-            <Typography paragraph>Mileage: {/** */}</Typography>
-            <Typography paragraph>Color: {/** */}</Typography>
+            <Typography paragraph>Condition: {car.condition}</Typography>
+            <Typography paragraph>Mileage: {car.mileage}</Typography>
+            <Typography paragraph>Color: {car.color}</Typography>
           </CardContent>
           <CardContent className="flex justify-around">
             <Button variant="contained">Edit</Button>

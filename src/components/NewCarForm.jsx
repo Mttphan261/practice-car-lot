@@ -1,7 +1,52 @@
 import React, {useState} from "react";
 
-function NewCarForm() {
+function NewCarForm({addCar}) {
   const [showForm, setShowForm] = useState(false);
+
+  //POST
+  const initialForm = {
+    car_make: '',
+    car_model: '',
+    car_model_year: '',
+    color: '',
+    mileage: '',
+    price: '',
+    condition: '',
+    image: ''
+  }
+
+  const [form, setForm] = useState(initialForm)
+
+  //event for input values
+  function handleChange(e) {
+    setForm({
+      ...form,
+      [e.target.name]:e.target.value
+    })
+  }
+
+  function handlePOST(e) {
+    e.preventDefault()
+    fetch('http://localhost:3001/cars', {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        car_make: form.car_make,
+        car_model: form.car_model,
+        car_model_year: form.car_model_year,
+        color: form.color,
+        mileage: form.mileage,
+        price: form.price,
+        condition: form.condition,
+        image: form.image
+      })
+    })
+    .then((r) => r.json())
+    .then((data) => addCar(data))
+  }
+
 
   function toggleForm() {
     setShowForm(prevShowForm => !showForm);
@@ -10,7 +55,7 @@ function NewCarForm() {
   return (
     <div className="new_car_form">
       {showForm ? (
-        <form id="car-form" className="sale-form">
+        <form id="car-form" className="sale-form" onSubmit={handlePOST}>
           <div className="row">
             <div className="left">
               <label htmlFor="car_model_year">YEAR</label>
@@ -20,7 +65,9 @@ function NewCarForm() {
                 name="car_model_year"
                 id="year-input"
                 required
-                aria-required="true">
+                aria-required="true"
+                onChange={(e) => {handleChange(e)}}
+                >
                 <option value=""></option>
                 <option value="2023">2023</option>
                 <option value="2022">2022</option>
@@ -46,6 +93,7 @@ function NewCarForm() {
             </div>
             <div className="right">
               <input
+              onChange={(e) => {handleChange(e)}}
                 type="text"
                 name="car_make"
                 id="make-form"
@@ -62,6 +110,7 @@ function NewCarForm() {
             </div>
             <div className="right">
               <input
+              onChange={(e) => {handleChange(e)}}
                 type="text"
                 name="car_model"
                 id="model-form"
@@ -77,6 +126,7 @@ function NewCarForm() {
             </div>
             <div className="right">
               <input
+              onChange={(e) => {handleChange(e)}}
                 type="text"
                 name="price"
                 id="price-form"
@@ -95,6 +145,7 @@ function NewCarForm() {
             </div>
             <div className="right">
               <select
+              onChange={(e) => {handleChange(e)}}
                 name="condition"
                 id="condition-form"
                 required
@@ -112,6 +163,7 @@ function NewCarForm() {
             </div>
             <div className="right">
               <input
+              onChange={(e) => {handleChange(e)}}
                 type="tel"
                 name="mileage"
                 id="mileage-form"
@@ -128,6 +180,7 @@ function NewCarForm() {
             </div>
             <div className="right">
               <input
+              onChange={(e) => {handleChange(e)}}
                 type="text"
                 name="color"
                 id="color-form"
@@ -143,7 +196,7 @@ function NewCarForm() {
               <label htmlFor="image">IMAGE URL</label>
             </div>
             <div className="right">
-              <input type="text" name="image" id="image_url" />
+              <input onChange={(e) => {handleChange(e)}} type="text" name="image" id="image_url" />
             </div>
           </div>
 
